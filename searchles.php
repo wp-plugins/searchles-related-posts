@@ -5,15 +5,15 @@
  * @version 0.3
  */
 /*
-Plugin Name: Searchles Discovery
-Plugin URI: http://www.searchles.com/misc/platform
-Description: View related content for your blog via the Searchles engine.
-Author: Peter Hale
-Version: 0.3
-Author URI: http://www.searchles.com/misc/platform
+Plugin Name: Searchles Discovery Related Content Widget
+Plugin URI: http://www.searchles.com/misc/bloggers
+Description: View related content for your blog using the Searchles Discovery platform. <b> Make sure you configure the widget under the Appearance -&gt; Widgets!! </b> Click the add button, then configure on the right and 'Save Change' or else the widget will not show up.
+Author: Searchles Inc.
+Version: 0.5
+Author URI: http://www.searchles.com/misc/bloggers
 */
 
-define(SEARCHLES_WIDGET_ID, "widget_searchles_1_3_7");
+define(SEARCHLES_WIDGET_ID, "widget_searchles_1_5_0");
 
 function get_searchles_content($content) {
 
@@ -21,6 +21,11 @@ function get_searchles_content($content) {
 	echo $content;
   widget_searchles_header();
 	  $options = get_option(SEARCHLES_WIDGET_ID);
+	  if (!is_array($options))
+	  {
+		widget_set_defaults();
+		$options = get_option(SEARCHLES_WIDGET_ID);
+	  }
 		
 		echo "<div class='widget-content'>";
 		echo "<!-- Searchles Widget Code -->";
@@ -97,11 +102,11 @@ function widget_searchles_header() {
 function check_searchles_posts($ar) {
 }
 
-function widget_get_searchles_content_control() {
-  $options = get_option(SEARCHLES_WIDGET_ID);
-  if (!is_array($options)) {
+
+function widget_set_defaults()
+{
     $options = array();
-    $options['client_id'] = 'test';
+    $options['client_id'] = 'host|auto';
     $options['font_size'] = '10';
     $options['related_color'] = 'CC0000';
     $options['header_fill'] = 'F6F6F6';
@@ -114,7 +119,31 @@ function widget_get_searchles_content_control() {
     $options['header_text'] = 'Related Content';
     $options['link_font'] = 'Verdana';
     $options['widget_width'] = '450';
-    $options['widget_height'] = '180';
+    $options['widget_height'] = '230';
+
+    $options_to_save = $_POST[SEARCHLES_WIDGET_ID];
+    update_option(SEARCHLES_WIDGET_ID, $options_to_save);
+
+}
+
+function widget_get_searchles_content_control() {
+  $options = get_option(SEARCHLES_WIDGET_ID);
+  if (!is_array($options)) {
+    $options = array();
+    $options['client_id'] = 'host|auto';
+    $options['font_size'] = '10';
+    $options['related_color'] = 'CC0000';
+    $options['header_fill'] = 'F6F6F6';
+    $options['link_color'] = '666666';
+    $options['border_color'] = 'CCCCCC';
+    $options['background_color'] = 'FFFFFF';
+    $options['link_bold'] = 'bold';
+    $options['show_separator'] = 'true';
+    $options['separation'] = '10';
+    $options['header_text'] = 'Related Content';
+    $options['link_font'] = 'Verdana';
+    $options['widget_width'] = '450';
+    $options['widget_height'] = '230';
   }
 
   $options_to_save = $_POST[SEARCHLES_WIDGET_ID];
@@ -127,7 +156,7 @@ function widget_get_searchles_content_control() {
 ?>
 
 <p>
-<label for="<?php echo SEARCHLES_WIDGET_ID;?>-client_id"> Searchles Client Id: </label>
+<label for="<?php echo SEARCHLES_WIDGET_ID;?>-client_id"> Searchles Client Id (do not change unless you have signed up at Searchles): </label>
 <input class="widefat" type="text" name="<?php echo SEARCHLES_WIDGET_ID; ?>[client_id]" id="<?php echo SEARCHLES_WIDGET_ID; ?>-client_id" value="<?php echo $options['client_id']; ?>"/>
 </p>
 <p>

@@ -1,6 +1,6 @@
 === Searchles Related Posts Widget ===
 Contributors: dumbfounder
-Donate link: http://example.com/
+Donate link: 
 Tags: search,related content,searchles,related posts,related articles,contextual widget
 Requires at least: 2.0.2
 Tested up to: 2.7
@@ -22,8 +22,9 @@ Display contextually related posts from your blog using the Searchles Discovery 
 * Click on "Activate Plugin"
 * Under Appearance on the left column, click "Widgets"
 * Click "Add" next to Searchles Discovery
-* Very Important: On the right side, click "Edit" and change your client id to your client id you specified when signing up at Searchles.
+* Very Important: On the right side, click "Edit" and configure the widget, then click "Save Changes".
 * Change the size and colors of widget to make it fit your layout (optional)
+* Email us at widget -at- searchles dot com for help
 
 you are done! try viewing a blog post.
 (Note: the widget will only show on post pages)
